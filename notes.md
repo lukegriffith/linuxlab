@@ -182,3 +182,67 @@ case $var in
     tabby) ccho "CAT!" ;& # Dont break, keep going
     ....
 ```
+
+# Shared Libs 
+
+.so fles are generally shared objects from libs. 
+
+major verisions are symlinked to the most recent minor release. A new symlink will be rewritten to direct it to the correct minor.
+
+Once major is released, a new lib name is released. ie /lib/libc.so.6 to /lib/libc.so.7. These would symlink to the minor release.
+
+ldd command identifies shared libs that are used
+
+```
+root@centos01:/lib# ldd $(which vi)
+        linux-vdso.so.1 =>  (0x00007ffcbe9b1000)
+        libselinux.so.1 => /lib64/libselinux.so.1 (0x00007fc08e188000)
+        libtinfo.so.5 => /lib64/libtinfo.so.5 (0x00007fc08df5e000)
+        libacl.so.1 => /lib64/libacl.so.1 (0x00007fc08dd54000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007fc08d993000)
+        libpcre.so.1 => /lib64/libpcre.so.1 (0x00007fc08d732000)
+        libdl.so.2 => /lib64/libdl.so.2 (0x00007fc08d52d000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fc08e3b7000)
+        libattr.so.1 => /lib64/libattr.so.1 (0x00007fc08d328000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x00007fc08d10c000)
+```
+
+# Compiling with VIM 
+
+git clone <vim link>
+
+cd vim
+
+./configure  # Failed
+
+# Googled around needed to install ncurses-devel  
+sudo yum install ncurses-devel
+
+./configure 
+make
+
+# Kernel bootstraps system with init.
+
+```
+lg@centos01:~/linuxlab/vim$ ps -ejH
+...
+    1     1     1 ?        00:00:03 systemd
+  463   463   463 ?        00:00:01   systemd-journal
+  593   593   593 ?        00:00:00   systemd-logind
+  595   595   595 ?        00:00:00   dbus-daemon
+  615   615   615 ?        00:00:00   crond
+  622   622   622 tty1     00:00:00   agetty
+  703   703   703 ?        00:00:00   NetworkManager
+11909 11909   703 ?        00:00:00     dhclient
+ 1038  1038  1038 ?        00:00:00   rsyslogd
+ 1359  1359  1359 ?        00:00:00   master
+ 1372  1359  1359 ?        00:00:00     qmgr
+22199  1359  1359 ?        00:00:00     pickup
+ 3405  3405  3405 ?        00:00:00   sshd
+ 3408  3405  3405 ?        00:00:02     sshd
+ 3409  3409  3409 pts/0    00:00:00       bash
+11197 11197  3409 pts/0    00:00:00         sh
+21075 21075  3409 pts/0    00:00:00           ps
+```
+
+Everything is spawned by init, see systemd for this - my bash prompt and the ps command running from that is all under systemd --- PID 1
