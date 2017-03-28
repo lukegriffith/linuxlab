@@ -215,7 +215,7 @@ cd vim
 
 ./configure  # Failed
 
-# Googled around needed to install ncurses-devel  
+- Googled around needed to install ncurses-devel  
 sudo yum install ncurses-devel
 
 ./configure 
@@ -246,3 +246,15 @@ lg@centos01:~/linuxlab/vim$ ps -ejH
 ```
 
 Everything is spawned by init, see systemd for this - my bash prompt and the ps command running from that is all under systemd --- PID 1
+
+
+# Runlevels
+
+Sets of services that are going to be running
+0 halt
+1 single user -- Safe mode 
+2 - 5 services, users, etc. 
+6 reboot
+
+# init.d
+Shell scripts that start deamon services, the shell script bootstraps the binary into running on the system. 
