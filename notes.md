@@ -1,3 +1,5 @@
+# Linux training
+
 shebangs run from root context
 
 /usr/local/bin - System wide scripts
@@ -22,4 +24,24 @@ lg@centos01:~/linuxlab$ echo ${A[1]}
 Test1
 lg@centos01:~/linuxlab$ echo ${A[2]}                                                                                    
 Test2
+
+# String Slicing? 
+lg@centos01:~/linuxlab$ A="MyString REMOVEME"
+lg@centos01:~/linuxlab$ echo ${A%REMOVEME}
+MyString
+
+# String Length
+
+lg@centos01:~/linuxlab$ 
+lg@centos01:~/linuxlab$ echo ${#A}
+17
+
+# Reading input
+
+lg@centos01:~/linuxlab$ echo "Enter your name"
+Enter your name
+lg@centos01:~/linuxlab$ read name
+Luke
+lg@centos01:~/linuxlab$ echo $name
+Luke
 
