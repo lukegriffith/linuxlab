@@ -258,3 +258,13 @@ Sets of services that are going to be running
 
 # init.d
 Shell scripts that start deamon services, the shell script bootstraps the binary into running on the system. 
+
+an init.d script is called with start and stop arguments, this is no more complicated than a switch case in the shell script, looking a $1 argument. 
+
+```
+case $1
+  start)
+    #Start logic ;;
+  stop)
+    #Stop Logic ;;
+```
